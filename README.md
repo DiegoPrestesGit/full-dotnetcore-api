@@ -1,6 +1,6 @@
 # Sistema de gerenciamento da minha **banca de tapioquinha**
-##
-### Requisitos Funcionais
+
+## Requisitos Funcionais
 
 * [ ] REQUISITOS DO PRODUTO
   * [x] REQ-0105	Eu, como administrador do sistema quero cadastrar diversos produtos (restaurante)
@@ -18,12 +18,17 @@
   * [ ] REQ-0105  Criar relação ONE-TO-MANY entre fornecedor e produto
 
 * [ ] REQUISITOS DO FUNCIONARIO
-  * [ ] REQ-0114	Eu, como administrador do sistema quero cadastrar o funcionário (cozinheiro(a), garçon, chapeiro e entregador Considerar o CRUD deste item.
+  * [x] REQ-0101	Eu, como administrador do sistema quero poder cadastrar funcionarios
+  * [x] REQ-0102	Eu, como administrador do sistema quero excluir um funcionario
+  * [x] REQ-0103	Eu, como administrador do sistema quero selecionar um funcionario pelo código
+  * [x] REQ-0104	Eu, como administrador do sistema quero UPDATE informações de cadastro do funcionario
   * [ ] REQ-0115	Eu, como administrador do sistema quero que em cada venda acima de R$150,00 os funcionários recebam um incremento de 0,05% no salário diário.
 
 * [ ] REQUISITOS DO CLIENTE
-  * [ ] REQ-0120	Eu, como administrador do sistema quero cadastrar o cliente.
-  * [ ] REQ-0121  Eu, como administrador do sistema quero atualizar os dados do cliente
+  * [ ] REQ-0101	Eu, como administrador do sistema quero poder cadastrar clientes
+  * [ ] REQ-0102	Eu, como administrador do sistema quero excluir um cliente
+  * [ ] REQ-0103	Eu, como administrador do sistema quero selecionar um cliente pelo código
+  * [ ] REQ-0104	Eu, como administrador do sistema quero UPDATE informações de cadastro do cliente
   * [ ] REQ-0125	Eu, como administrador do sistema quero que em cada compra do cliente seja atribuído uma pontuação no cadastro de acordo com o produto.
   * [ ] REQ-0122  Eu, como administrador do sistema quero deletar o cliente
   * [ ] REQ-0123  Eu, como administrador do sistema quero ler os dados do cliente pelo código
@@ -31,3 +36,8 @@
 
 * [ ] REQUISITOS DO SISTEMA
   * [ ] REQ-0116	Eu, como administrador do sistema quero que em toda a venda seja informado o tipo de pagamento
+
+## TODO AFTER
+
+* [ ] Limpar código (remover importações e variáveis não utilizadas)
+* [ ] Exportar arquivo do INSOMNIA no GitHub para fazer as requisições

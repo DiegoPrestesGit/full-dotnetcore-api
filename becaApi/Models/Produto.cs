@@ -22,10 +22,9 @@ namespace becaApi.Models
         [Required(ErrorMessage = "Campo obrigatório")]
         [Range(1, double.MaxValue, ErrorMessage = "caracteres demais!")]
         public double Preco { get; set; }
-
         public Fornecedor Fornecedor { get; set; }
-
         public int FornecedorId { get; set; }
-
+        public Pedido Pedido { get; set; }
+        public int PedidoId { get; set; }
     }
 }

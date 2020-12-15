@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace becaApi.Models
 {
-    public class Funcionario
+    public class Cliente
     {
         [Key]
         public int Id { get; set; }
@@ -14,13 +14,7 @@ namespace becaApi.Models
         [Required(ErrorMessage = "Campo obrigatório")]
         [MaxLength(50, ErrorMessage = "Este campo deve ter no máximo 50 caracteres")]
         public string Nome { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
-        [MaxLength(50, ErrorMessage = "Este campo deve ter no máximo 50 caracteres")]
-        public string Funcao { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
-        [Range(1, double.MaxValue, ErrorMessage = "Este campo deve ter entre 10 e 20 caracteres")]
-        public double Salario { get; set; }
+        public string Phone { get; set; }
+        public int Pontos { get; set; }
     }
 }
