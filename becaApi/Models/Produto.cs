@@ -12,12 +12,20 @@ namespace becaApi.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [MaxLength(ErrorMessage = "Este campo deve ter entre 10 e 20 caracteres")]
+        [MaxLength(100, ErrorMessage = "Este campo tem no maximo 100 caracteres")]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatório")]
-        [Range(1, int.MaxValue, ErrorMessage = "Este campo deve ter entre 10 e 20 caracteres")]
-        public int Pontuacao { get; set; }
-        public int Preco { get; set; }
+        [Range(1, double.MaxValue, ErrorMessage = "caracteres demais!")]
+        public double Pontuacao { get; set; }
+
+        [Required(ErrorMessage = "Campo obrigatório")]
+        [Range(1, double.MaxValue, ErrorMessage = "caracteres demais!")]
+        public double Preco { get; set; }
+
+        public Fornecedor Fornecedor { get; set; }
+
+        public int FornecedorId { get; set; }
+
     }
 }

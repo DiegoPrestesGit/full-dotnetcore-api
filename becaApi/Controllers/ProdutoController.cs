@@ -1,153 +1,106 @@
-﻿using System;
+﻿using becaApi.Data;
+using becaApi.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using becaApi.Data;
-using becaApi.Models;
 
 namespace becaApi.Controllers
 {
-    public class ProdutoController : Controller
+    [ApiController]
+    [Route("produto")]
+    public class ProdutoController : ControllerBase
     {
-        private readonly DataContext _context;
-
-        public ProdutoController(DataContext context)
+        // TESTADO
+        [HttpGet]
+        [Route("")]
+        public async Task<ActionResult<List<Produto>>> Index([FromServices] DataContext context)
         {
-            _context = context;
+            var produtos = await context.Produtos.ToListAsync();
+            return produtos;
         }
 
-        // GET: Produto
-        public async Task<IActionResult> Index()
+        // TESTADO
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<ActionResult<Produto>> GetById([FromServices] DataContext context, int id)
         {
-            return View(await _context.Produtos.ToListAsync());
+            var produto = await context.Produtos.AsNoTracking().FirstOrDefaultAsync(produto => produto.Id == id);
+            return produto;
         }
 
-        // GET: Produto/Details/5
-        public async Task<IActionResult> Details(int? id)
+        // TESTAR
+        [HttpGet]
+        [Route("fornecedor/{id:int}")]
+        public async Task<ActionResult<List<Produto>>> GetAllByFornecedor([FromServices] DataContext context, int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var produto = await _context.Produtos
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (produto == null)
-            {
-                return NotFound();
-            }
-
-            return View(produto);
+            var produtos = await context.Produtos.Include(produto => produto.Fornecedor)
+                .AsNoTracking()
+                .Where(produto => produto.FornecedorId == id)
+                .ToListAsync();
+            return produtos;
         }
 
-        // GET: Produto/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Produto/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // TESTADO
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,Pontuacao,Preco")] Produto produto)
+        [Route("")]
+        public async Task<ActionResult<Produto>> Create([FromServices] DataContext context, [FromBody] Produto produto)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(produto);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                context.Produtos.Add(produto);
+                await context.SaveChangesAsync();
+                return produto;
             }
-            return View(produto);
+            else
+            {
+                Console.WriteLine("Presta atenção na sua model");
+                return BadRequest(ModelState);
+            }
         }
 
-        // GET: Produto/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        // TESTADO
+        [HttpPut]
+        [Route("")]
+        public async Task<ActionResult<Produto>> Update([FromServices] DataContext context, [FromBody] Produto produto)
         {
-            if (id == null)
+            if(produto.Id == 0)
             {
-                return NotFound();
+                Console.WriteLine("Preciso do ID para alterar o produto certo!");
+                return BadRequest(ModelState);
             }
-
-            var produto = await _context.Produtos.FindAsync(id);
-            if (produto == null)
-            {
-                return NotFound();
-            }
-            return View(produto);
-        }
-
-        // POST: Produto/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Pontuacao,Preco")] Produto produto)
-        {
-            if (id != produto.Id)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(produto);
-                    await _context.SaveChangesAsync();
+                    context.Produtos.Update(produto);
+                    await context.SaveChangesAsync();
+                    return produto;
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProdutoExists(produto.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                catch{return NotFound();}
             }
-            return View(produto);
+            else
+            {
+                Console.WriteLine("Presta atenção na sua model");
+                return BadRequest(ModelState);
+            }
         }
 
-        // GET: Produto/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        // TESTADO
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<ActionResult<Produto>> Delete([FromServices] DataContext context, int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var produto = await _context.Produtos
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var produto = await context.Produtos.AsNoTracking().FirstOrDefaultAsync(prod => prod.Id == id);
             if (produto == null)
             {
                 return NotFound();
             }
-
-            return View(produto);
-        }
-
-        // POST: Produto/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var produto = await _context.Produtos.FindAsync(id);
-            _context.Produtos.Remove(produto);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ProdutoExists(int id)
-        {
-            return _context.Produtos.Any(e => e.Id == id);
+            context.Produtos.Remove(produto);
+            await context.SaveChangesAsync();
+            return produto;
         }
     }
 }
