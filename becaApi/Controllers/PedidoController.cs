@@ -43,14 +43,35 @@ namespace becaApi.Controllers
             return pedidos;
         }
 
-        // TESTADO
+        // TESTAR PONTOS DO CLIENTE
         [HttpPost]
         [Route("")]
         public async Task<ActionResult<Pedido>> Create([FromServices] DataContext context, [FromBody] Pedido pedido)
         {
             if (ModelState.IsValid)
             {
+                
+                Cliente cliente = pedido.Cliente;
+                cliente.Pontos += pedido.PontosTotais;
+
+                if(cliente.Pontos >= 1000)
+                {
+                    cliente.FlagDesconto = true;
+                    cliente.Pontos -= 1000;
+                }
+
+                if (pedido.Valor >= 150.00)
+                {
+                    await context.Funcionarios.ForEachAsync(func => func.Salario *= 1.05);
+                }
+
+                if (cliente.FlagDesconto)
+                {
+                    pedido.Valor *= 0.8;
+                }
+
                 context.Pedidos.Add(pedido);
+                context.Clientes.Update(cliente);
                 await context.SaveChangesAsync();
                 return pedido;
             }
