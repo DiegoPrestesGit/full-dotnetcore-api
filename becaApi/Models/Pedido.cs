@@ -10,13 +10,9 @@ namespace becaApi.Models
     {
         [Key]
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
         public int ClienteId { get; set; }
         public Cliente Cliente { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
+        public ICollection<PedidoProdutoRelation> ProdutosPedidos { get; set; }
         public int PontosTotais { get; set; }
-
     }
 }

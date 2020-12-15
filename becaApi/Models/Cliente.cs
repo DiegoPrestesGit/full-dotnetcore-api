@@ -15,5 +15,6 @@ namespace becaApi.Models
         public string Nome { get; set; }
         public string Phone { get; set; }
         public int Pontos { get; set; }
+        public ICollection<Pedido> Pedidos { get; set; }
     }
 }
