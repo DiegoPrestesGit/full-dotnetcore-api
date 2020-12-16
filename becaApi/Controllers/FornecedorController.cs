@@ -35,8 +35,8 @@ namespace becaApi.Controllers
         [Route("produto/{id:int}")]
         public async Task<ActionResult<Fornecedor>> GetFornecedorByProduto([FromServices] DataContext context, int id)
         {
-            var produto = await context.Produtos.AsNoTracking().FirstOrDefaultAsync(produto => produto.FornecedorId == id);
-            var fornecedor = await context.Fornecedores.AsNoTracking().FirstOrDefaultAsync(forn => forn.Id == id);
+            var produto = await context.Produtos.AsNoTracking().FirstOrDefaultAsync(produto => produto.Id == id);
+            var fornecedor = await context.Fornecedores.AsNoTracking().FirstOrDefaultAsync(forn => forn.Id == produto.FornecedorId);
             return fornecedor;
         }
 

@@ -33,7 +33,7 @@ namespace becaApi.Controllers
 
         // TESTAR
         [HttpGet]
-        [Route("pedidos/{id:int}")]
+        [Route("cliente/{id:int}")]
         public async Task<ActionResult<List<Pedido>>> GetAllByCliente([FromServices] DataContext context, int id)
         {
             var pedidos = await context.Pedidos.Include(pedido => pedido.ClienteId == id)
@@ -43,7 +43,7 @@ namespace becaApi.Controllers
             return pedidos;
         }
 
-        // TESTAR PONTOS DO CLIENTE
+        // TESTAR
         [HttpPost]
         [Route("")]
         public async Task<ActionResult<Pedido>> Create([FromServices] DataContext context, [FromBody] Pedido pedido)
@@ -53,11 +53,11 @@ namespace becaApi.Controllers
                 var cliente = await context.Clientes.AsNoTracking().FirstOrDefaultAsync(cli => cli.Id == pedido.ClienteId);
                 var produto = await context.Produtos.AsNoTracking().FirstOrDefaultAsync(prod => prod.PedidoId == pedido.Id);
 
-                if(produto.Quantidade < pedido.Quantidade)
-                {
-                    return BadRequest(StatusCode(500));
-                }
-                produto.Quantidade -= pedido.Quantidade;
+                // if(produto.Quantidade < pedido.Quantidade)
+                // {
+                //     return BadRequest(StatusCode(500));
+                // }
+                // produto.Quantidade -= pedido.Quantidade;
                 cliente.Pontos += pedido.PontosTotais;
 
                 if(cliente.Pontos >= 1000)
@@ -74,10 +74,12 @@ namespace becaApi.Controllers
                 if (cliente.FlagDesconto)
                 {
                     pedido.Valor *= 0.8;
+                    cliente.FlagDesconto = false;
                 }
+                
                 context.Pedidos.Add(pedido);
                 context.Clientes.Update(cliente);
-                context.Produtos.Update(produto);
+                // context.Produtos.Update(produto);
                 await context.SaveChangesAsync();
                 return pedido;
             }

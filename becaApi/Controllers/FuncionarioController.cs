@@ -39,7 +39,6 @@ namespace becaApi.Controllers
             return funcionarios;
         }
 
-
         // TESTAR
         [HttpPost]
         [Route("")]
