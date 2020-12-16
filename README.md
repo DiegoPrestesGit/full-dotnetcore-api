@@ -30,6 +30,13 @@
   * [x] REQ-0125	Eu, como administrador do sistema quero que em cada compra do cliente seja atribuído uma pontuação no cadastro de acordo com o produto.
   * [x] REQ-0124 	Eu, como administrador do sistema quero que quando a pontuação de fidelidade do cliente chegar a 1000 pontos, o cliente possa trocar por um desconto de 20% na próxima compra.
 
+* [x] REQUISITOS DO ESTOQUE
+  * [x] REQ-0101	Eu, como administrador do sistema quero poder cadastrar o estoque do produto.
+  * [x] REQ-0102	Eu, como administrador do sistema quero excluir um estoque do produto.
+  * [x] REQ-0103	Eu, como administrador do sistema quero selecionar um estoque do produto pelo código.
+  * [x] REQ-0104	Eu, como administrador do sistema quero UPDATE informações de cadastro do estoque do produto.
+
+
 * [x] REQUISITOS DO SISTEMA
   * [x] REQ-0116	Eu, como administrador do sistema quero que em toda a venda seja informado o tipo de pagamento.
 
@@ -38,4 +45,5 @@
 * [x] Criar relações entre entidades
 * [ ] Limpar código (remover importações e variáveis não utilizadas)
 * [ ] Exportar arquivo do INSOMNIA no GitHub para fazer as requisições
-* [ ] Testar todas as funções
+* [ ] Testar todas as rotas padrões
+* [ ] Testar todas as rotas alternativas

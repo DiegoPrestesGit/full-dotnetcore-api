@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace becaApi.Controllers
@@ -36,7 +35,7 @@ namespace becaApi.Controllers
         [Route("produto/{id:int}")]
         public async Task<ActionResult<Fornecedor>> GetFornecedorByProduto([FromServices] DataContext context, int id)
         {
-            var produto = await context.Produtos.AsNoTracking().FirstOrDefaultAsync(produto => produto.FornecedorId == id);
+            var produto = await context.Produtos.AsNoTracking().FirstOrDefaultAsync(produto => produto.Fornecedor.Id == id);
             return produto.Fornecedor;
         }
 

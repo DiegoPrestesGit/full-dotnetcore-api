@@ -38,7 +38,7 @@ namespace becaApi.Controllers
         {
             var produtos = await context.Produtos.Include(produto => produto.Fornecedor)
                 .AsNoTracking()
-                .Where(produto => produto.FornecedorId == id)
+                .Where(produto => produto.Fornecedor.Id == id)
                 .ToListAsync();
             return produtos;
         }

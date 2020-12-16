@@ -1,9 +1,5 @@
 ﻿using becaApi.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace becaApi.Data
 {
@@ -16,7 +12,7 @@ namespace becaApi.Data
         public DbSet<Funcionario> Funcionarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<EstoqueProduto> Estoques { get; set; }
+        public DbSet<Estoque> Estoques { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,7 +31,7 @@ namespace becaApi.Data
             .OnDelete(DeleteBehavior.Cascade);
 
             // ONE TO MANY => ESTOQUE E PRODUTO
-            modelBuilder.Entity<EstoqueProduto>()
+            modelBuilder.Entity<Estoque>()
             .HasMany(estoque => estoque.Produtos)
             .WithOne(prod => prod.Estoque)
             .IsRequired()
@@ -54,7 +50,6 @@ namespace becaApi.Data
             .HasOne(relation => relation.Produto)
             .WithMany(produto => produto.ProdutosPedidos)
             .HasForeignKey(relation => relation.ProdutoId);
-
         }
     }
 }

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace becaApi.Controllers
@@ -38,6 +37,7 @@ namespace becaApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                cliente.Pedidos = new List<Pedido>();
                 context.Clientes.Add(cliente);
                 await context.SaveChangesAsync();
                 return cliente;
