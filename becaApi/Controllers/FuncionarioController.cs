@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace becaApi.Controllers
@@ -17,7 +18,7 @@ namespace becaApi.Controllers
         [Route("")]
         public async Task<ActionResult<List<Funcionario>>> Index([FromServices] DataContext context)
         {
-            var funcionarios = await context.Funcionarios.ToListAsync();
+            var funcionarios = await context.ListaFuncionarios.ToListAsync();
             return funcionarios;
         }
 
@@ -26,9 +27,18 @@ namespace becaApi.Controllers
         [Route("{id:int}")]
         public async Task<ActionResult<Funcionario>> GetById([FromServices] DataContext context, int id)
         {
-            var funcionario = await context.Funcionarios.AsNoTracking().FirstOrDefaultAsync(func => func.Id == id);
+            var funcionario = await context.ListaFuncionarios.AsNoTracking().FirstOrDefaultAsync(func => func.Id == id);
             return funcionario;
         }
+
+        [HttpGet]
+        [Route("funcao/{funcao}")]
+        public async Task<ActionResult<List<Funcionario>>> GetByFuncao([FromServices] DataContext context, string funcao)
+        {
+            var funcionarios = await context.ListaFuncionarios.Where(func => func.Funcao == funcao).ToListAsync();
+            return funcionarios;
+        }
+
 
         // TESTAR
         [HttpPost]
@@ -37,7 +47,7 @@ namespace becaApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Funcionarios.Add(funcionario);
+                context.ListaFuncionarios.Add(funcionario);
                 await context.SaveChangesAsync();
                 return funcionario;
             }
@@ -62,7 +72,7 @@ namespace becaApi.Controllers
             {
                 try
                 {
-                    context.Funcionarios.Update(funcionario);
+                    context.ListaFuncionarios.Update(funcionario);
                     await context.SaveChangesAsync();
                     return funcionario;
                 }
@@ -83,12 +93,12 @@ namespace becaApi.Controllers
         [Route("{id:int}")]
         public async Task<ActionResult<Funcionario>> Delete([FromServices] DataContext context, int id)
         {
-            var funcionario = await context.Funcionarios.AsNoTracking().FirstOrDefaultAsync(prod => prod.Id == id);
+            var funcionario = await context.ListaFuncionarios.AsNoTracking().FirstOrDefaultAsync(prod => prod.Id == id);
             if (funcionario == null)
             {
                 return NotFound();
             }
-            context.Funcionarios.Remove(funcionario);
+            context.ListaFuncionarios.Remove(funcionario);
             await context.SaveChangesAsync();
             return funcionario;
         }

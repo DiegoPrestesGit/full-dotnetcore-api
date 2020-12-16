@@ -9,7 +9,7 @@ namespace becaApi.Data
 
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
-        public DbSet<Funcionario> Funcionarios { get; set; }
+        public DbSet<Funcionario> ListaFuncionarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<Estoque> Estoques { get; set; }

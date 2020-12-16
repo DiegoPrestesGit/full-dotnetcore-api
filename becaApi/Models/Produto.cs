@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace becaApi.Models
 {
@@ -8,7 +7,7 @@ namespace becaApi.Models
         [Key]
         public int Id { get; set; }
         public int FornecedorId { get; set; }
-        public int PedidoProdutoRelationId { get; set; }
+        public int PedidoId { get; set; }
         public int EstoqueId { get; set; }
         public string Nome { get; set; }
         public int Pontuacao { get; set; }

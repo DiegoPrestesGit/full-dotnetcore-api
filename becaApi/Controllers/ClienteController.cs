@@ -37,7 +37,6 @@ namespace becaApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                cliente.Pedidos = new List<Pedido>();
                 context.Clientes.Add(cliente);
                 await context.SaveChangesAsync();
                 return cliente;

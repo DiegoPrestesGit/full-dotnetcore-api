@@ -36,9 +36,9 @@ namespace becaApi.Controllers
         [Route("pedidos/{id:int}")]
         public async Task<ActionResult<List<Pedido>>> GetAllByCliente([FromServices] DataContext context, int id)
         {
-            var pedidos = await context.Pedidos.Include(pedido => pedido.Cliente.Id == id)
+            var pedidos = await context.Pedidos.Include(pedido => pedido.ClienteId == id)
                 .AsNoTracking()
-                .Where(pedido => pedido.Cliente.Id == id)
+                .Where(pedido => pedido.ClienteId == id)
                 .ToListAsync();
             return pedidos;
         }
@@ -62,18 +62,13 @@ namespace becaApi.Controllers
 
                 if (pedido.Valor >= 150.00)
                 {
-                    await context.Funcionarios.ForEachAsync(func => func.Salario *= 1.05);
+                    await context.ListaFuncionarios.ForEachAsync(func => func.Salario *= 1.05);
                 }
 
                 if (cliente.FlagDesconto)
                 {
                     pedido.Valor *= 0.8;
                 }
-                if(cliente.Pedidos == null)
-                {
-                    cliente.Pedidos = new List<Pedido>();
-                }
-                cliente.Pedidos.Add(pedido);
                 context.Pedidos.Add(pedido);
                 context.Clientes.Update(cliente);
                 await context.SaveChangesAsync();

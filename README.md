@@ -7,7 +7,7 @@
   * [x] REQ-0106	Eu, como administrador do sistema quero excluir produtos.
   * [x] REQ-0107	Eu, como administrador do sistema quero selecionar produtos pelo código.
   * [x] REQ-0108	Eu, como administrador do sistema UPDATE informações do produto.
-  * [ ] REQ-0109	Eu, como administrador do sistema quero administrar o estoque do produto. O produto deve ter uma quantidade mínima no estoque. Quando atingir esta quantidade deve avisar o administrador da necessidade de se fazer um novo pedido.
+  * [x] REQ-0109	Eu, como administrador do sistema quero administrar o estoque do produto. O produto deve ter uma quantidade mínima no estoque. Quando atingir esta quantidade deve avisar o administrador da necessidade de se fazer um novo pedido.
 
 * [x] REQUISITOS DO FORNECEDOR
   * [x] REQ-0101	Eu, como administrador do sistema quero poder cadastrar fornecedores.
@@ -43,7 +43,7 @@
 ## TODO
 
 * [x] Criar relações entre entidades
-* [ ] Limpar código (remover importações e variáveis não utilizadas)
-* [ ] Exportar arquivo do INSOMNIA no GitHub para fazer as requisições
 * [ ] Testar todas as rotas padrões
 * [ ] Testar todas as rotas alternativas
+* [ ] Limpar código (remover importações e variáveis não utilizadas)
+* [ ] Exportar arquivo do INSOMNIA no GitHub para fazer as requisições

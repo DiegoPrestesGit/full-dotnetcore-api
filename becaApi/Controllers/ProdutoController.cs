@@ -36,10 +36,24 @@ namespace becaApi.Controllers
         [Route("fornecedor/{id:int}")]
         public async Task<ActionResult<List<Produto>>> GetAllByFornecedor([FromServices] DataContext context, int id)
         {
-            var produtos = await context.Produtos.Include(produto => produto.Fornecedor)
-                .AsNoTracking()
-                .Where(produto => produto.Fornecedor.Id == id)
-                .ToListAsync();
+            var produtos = await context.Produtos.Where(prod => prod.FornecedorId == id).ToListAsync();
+            return produtos;
+        }
+
+        [HttpGet]
+        [Route("estoque/{id:int}")]
+        public async Task<ActionResult<List<Produto>>> GetAllByEstoque([FromServices] DataContext context, int id)
+        {
+            var produtos = await context.Produtos.Where(prod => prod.EstoqueId == id).ToListAsync();
+            return produtos;
+        }
+
+        [HttpGet]
+        [Route("pedido/{id:int}")]
+        public async Task<ActionResult<List<Produto>>> GetAllByPedido([FromServices] DataContext context, int id)
+        {
+            var produtos = await context.Produtos.Where(prod => prod.PedidoId == id).ToListAsync();
+            
             return produtos;
         }
 
