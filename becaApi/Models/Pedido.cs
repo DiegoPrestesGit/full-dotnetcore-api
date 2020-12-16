@@ -11,9 +11,8 @@ namespace becaApi.Models
         [Key]
         public int Id { get; set; }
         public int ClienteId { get; set; }
-        public Cliente Cliente { get; set; }
         public string MetodoPagamento { get; set; }
-        public ICollection<PedidoProdutoRelation> ProdutosPedidos { get; set; }
+        public int PedidoProdutoRelationId { get; set; }
         public double Valor { get; set; }
         public int PontosTotais { get; set; }
     }

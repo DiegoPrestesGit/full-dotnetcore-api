@@ -10,14 +10,8 @@ namespace becaApi.Models
     {
         [Key]
         public int Id { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
         public string Nome { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
         public string Funcao { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
         public double Salario { get; set; }
     }
 }

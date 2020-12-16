@@ -10,13 +10,7 @@ namespace becaApi.Models
     {
         [Key]
         public int Id { get; set; }
-
-        public List<Produto> ProdutosOferecidos { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
         public string CNPJ { get; set; }
-
-        [Required(ErrorMessage = "Campo obrigatório")]
         public string Nome { get; set; }
     }
 }
