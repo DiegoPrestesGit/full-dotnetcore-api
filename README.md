@@ -2,7 +2,7 @@
 
 ## Requisitos Funcionais
 
-* [ ] REQUISITOS DO PRODUTO
+* [x] REQUISITOS DO PRODUTO
   * [x] REQ-0105	Eu, como administrador do sistema quero cadastrar diversos produtos (restaurante).
   * [x] REQ-0106	Eu, como administrador do sistema quero excluir produtos.
   * [x] REQ-0107	Eu, como administrador do sistema quero selecionar produtos pelo código.
@@ -22,7 +22,7 @@
   * [x] REQ-0104	Eu, como administrador do sistema quero UPDATE informações de cadastro do funcionario.
   * [x] REQ-0115	Eu, como administrador do sistema quero que em cada venda acima de R$150,00 os funcionários recebam um incremento de 0,05% no salário diário.
 
-* [ ] REQUISITOS DO CLIENTE
+* [x] REQUISITOS DO CLIENTE
   * [x] REQ-0101	Eu, como administrador do sistema quero poder cadastrar clientes.
   * [x] REQ-0102	Eu, como administrador do sistema quero excluir um cliente.
   * [x] REQ-0103	Eu, como administrador do sistema quero selecionar um cliente pelo código.
@@ -43,7 +43,7 @@
 ## TODO
 
 * [x] Criar relações entre entidades
-* [ ] Testar todas as rotas padrões
+* [x] Testar todas as rotas padrões
 * [ ] Testar todas as rotas alternativas
 * [ ] Limpar código (remover importações e variáveis não utilizadas)
 * [ ] Exportar arquivo do INSOMNIA no GitHub para fazer as requisições
