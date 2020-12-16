@@ -8,9 +8,8 @@ namespace becaApi.Models
         public int Id { get; set; }
         public int FornecedorId { get; set; }
         public int PedidoId { get; set; }
-        public int EstoqueId { get; set; }
         public string Nome { get; set; }
-        public int Pontuacao { get; set; }
-        public double Preco { get; set; }
+        public int Quantidade { get; set; }
+        public int QuantidadeMinima { get; set; }
     }
 }

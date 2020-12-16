@@ -12,6 +12,5 @@ namespace becaApi.Data
         public DbSet<Funcionario> ListaFuncionarios { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
-        public DbSet<Estoque> Estoques { get; set; }
     }
 }

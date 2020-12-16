@@ -51,7 +51,13 @@ namespace becaApi.Controllers
             if (ModelState.IsValid)
             {
                 var cliente = await context.Clientes.AsNoTracking().FirstOrDefaultAsync(cli => cli.Id == pedido.ClienteId);
+                var produto = await context.Produtos.AsNoTracking().FirstOrDefaultAsync(prod => prod.PedidoId == pedido.Id);
 
+                if(produto.Quantidade < pedido.Quantidade)
+                {
+                    return BadRequest(StatusCode(500));
+                }
+                produto.Quantidade -= pedido.Quantidade;
                 cliente.Pontos += pedido.PontosTotais;
 
                 if(cliente.Pontos >= 1000)
@@ -71,6 +77,7 @@ namespace becaApi.Controllers
                 }
                 context.Pedidos.Add(pedido);
                 context.Clientes.Update(cliente);
+                context.Produtos.Update(produto);
                 await context.SaveChangesAsync();
                 return pedido;
             }

@@ -41,14 +41,6 @@ namespace becaApi.Controllers
         }
 
         [HttpGet]
-        [Route("estoque/{id:int}")]
-        public async Task<ActionResult<List<Produto>>> GetAllByEstoque([FromServices] DataContext context, int id)
-        {
-            var produtos = await context.Produtos.Where(prod => prod.EstoqueId == id).ToListAsync();
-            return produtos;
-        }
-
-        [HttpGet]
         [Route("pedido/{id:int}")]
         public async Task<ActionResult<List<Produto>>> GetAllByPedido([FromServices] DataContext context, int id)
         {
